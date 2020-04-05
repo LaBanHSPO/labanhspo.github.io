@@ -1,0 +1,15 @@
+---
+---
+@import "main";
+.menu-item {
+    text-decoration: none;
+    color: #ffff;
+    padding: 3px 30px;
+    line-height: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    &:hover {
+        background-color:#caa612;
+    }
+}
+

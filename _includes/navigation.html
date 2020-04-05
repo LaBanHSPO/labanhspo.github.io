@@ -1,0 +1,10 @@
+<nav>
+    {% for item in site.data.navigation %}
+        {% if page.url == item.link %}
+            {% assign wrapperClassName = "menu-item current" %}
+        {% else %}
+            {% assign wrapperClassName = "menu-item" %}
+        {% endif %}
+        <a class={{wrapperClassName}} href="{{ item.link }}">{{ item.name }}</a>
+    {% endfor %}
+</nav>
