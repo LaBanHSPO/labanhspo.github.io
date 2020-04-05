@@ -50,20 +50,25 @@
   }
   
   pre {
-    padding: 1rem 2rem;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: break-all;
+    padding: 0.5rem !important;
+    border: solid 1px #d1d1d1;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 0 0 1rem;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    line-height: 1.4em;
   
     code {
-      border: 0;
-      padding-right: 0;
-      padding-left: 0;
-      overflow: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      word-break: break-all;
+      background-color: inherit;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
     }
   }
   

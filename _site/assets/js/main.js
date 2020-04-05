@@ -1,14 +1,14 @@
-const copyFunction = (copyText) => {
+const copyFunction = (anchor, copyText) => {
     const textArea = document.createElement('textarea');
     textArea.textContent = copyText;
-    document.body.append(textArea);
+    $(anchor).append(textArea);
     textArea.select();
     document.execCommand("copy");
 }
 
 $(document).ready(() => {
     $('.boostnote pre.code').on('click', function(e) {
-        copyFunction(e.target.innerText);
+        copyFunction(this, e.target.innerText);
         $(this).find('.clipboardButton').hide();
     });
 });
