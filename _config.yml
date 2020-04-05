@@ -13,6 +13,7 @@ defaults:
       layout: "main"
 
 title: Codemantn
+source: https://labanhspo.github.io
 description: > # this means to ignore newlines until "baseurl:"
   I am HSPO Developer
 permalink: ':title/'
@@ -21,7 +22,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Author Settings
 author: Ban Nguyen # add your name
 author-img: laban.png # add your photo
-about-author: Always hungry to keep learning. # add description
+about-author: You get what you deserve. # add description
 social-facebook: simpleBAN # add your Facebook handle
 social-linkedin: bannv # add your Linkedin handle
 social-email: codemantn@gmail.com
