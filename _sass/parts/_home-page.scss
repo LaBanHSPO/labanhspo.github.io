@@ -69,6 +69,9 @@
 }
 
 .contact {
+  a {
+    text-decoration: none;
+  }
   .contact-title {
     position: relative;
     color: $dark;
@@ -133,11 +136,15 @@ footer {
     margin: 0;
   }
 }
-.posts {
-  max-width: 80%;
+
+.post-wrapper {
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+.posts-container {
+  margin-bottom: 10px;
 }
 
 .post {
@@ -179,6 +186,9 @@ footer {
         text-decoration: none;
         color: $dark-blue;
       }
+    }
+    .post-descriptions {
+      margin: 0;
     }
     p {
       margin-top: 0;

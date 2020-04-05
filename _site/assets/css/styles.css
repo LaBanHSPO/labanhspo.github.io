@@ -867,6 +867,8 @@ textarea { position: absolute; left: -100%; }
 
 .content-box { padding: 20px; padding-left: 260px; display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; }
 
+.contact a { text-decoration: none; }
+
 .contact .contact-title { position: relative; color: #333030; font-weight: 400; font-size: 12px; margin: 0 0 5px; text-transform: uppercase; text-align: center; }
 
 .contact .contact-title::before { content: ""; display: block; height: 2px; width: calc(50% - 48px); transform: translateY(-50%); position: absolute; top: 50%; left: 0; background-color: #515151; }
@@ -885,7 +887,9 @@ textarea { position: absolute; left: -100%; }
 
 footer .copyright { font-size: 14px; text-align: center; margin: 0; }
 
-.posts { max-width: 80%; display: flex; flex-direction: column; align-items: stretch; }
+.post-wrapper { width: 70%; display: flex; flex-direction: column; align-items: stretch; }
+
+.posts-container { margin-bottom: 10px; }
 
 .post { width: 100%; max-width: 100%; display: flex; flex-direction: row; align-items: stretch; margin-bottom: 1.5rem; height: 6rem; border-radius: 10px; overflow: hidden; transition: all .3s ease; box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15); }
 
@@ -900,6 +904,8 @@ footer .copyright { font-size: 14px; text-align: center; margin: 0; }
 .post .post-content .post-title { margin: 0 0 5px; font-weight: 400; font-size: 1rem; }
 
 .post .post-content .post-title a { font-family: 'PT Serif', serif; text-decoration: none; color: #263959; }
+
+.post .post-content .post-descriptions { margin: 0; }
 
 .post .post-content p { margin-top: 0; }
 
@@ -917,6 +923,8 @@ a.newer-posts:hover { transform: translateX(-5px); }
 .header-page .page-title { font-weight: 400; margin: 0 0 10px; line-height: 1.3; }
 
 .header-page .page-date { color: #a0a0a0; font-weight: 300; font-size: 12px; text-transform: uppercase; }
+
+.page-cover-video iframe { min-height: 500px; width: 100%; }
 
 .page-cover-image { position: relative; padding: 0; margin: 0; max-height: 500px; background-color: #fafafa; overflow: hidden; }
 
@@ -961,15 +969,15 @@ a.newer-posts:hover { transform: translateX(-5px); }
 
 /* - - - - - - - - - - Media Styles - - - - - - - - - - */
 /* Medium Devices, Desktops */
-@media only screen and (max-width: 992px) { .post { width: 48%; max-width: 100%; margin: 0 0.9% 1.5%; flex-direction: column; }
-  .post .post-thumbnail { width: 100%; }
+@media only screen and (max-width: 992px) { .post-wrapper { width: 100%; }
+  .post { width: 98%; max-width: 100%; margin: 2%; flex-direction: row; }
+  .post .post-thumbnail { width: 30%; }
   .post .post-content { width: 100%; }
   .post .post-content .post-title { margin: 0 0 5px; }
-  .post .post-content .post-title a { font-size: 21px; } }
+  .post .post-content .post-title a { font-size: 1rem; } }
 
 /* Small Devices, Tablets */
-@media only screen and (max-width: 768px) { .sidebar { position: relative; display: flex; flex-direction: column; justify-content: space-between; width: 100%; padding: 10px; background-color: #ffffff; box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15); }
-  .sidebar footer { margin-bottom: 10px; }
+@media only screen and (max-width: 768px) { .sidebar { display: none; }
   .about { text-align: center; max-width: 480px; margin: 10px auto auto; }
   .about img { width: 100px; height: 100px; border-radius: 100%; margin-bottom: 10px; }
   .content-box { padding: 20px 10px; display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; }
@@ -977,11 +985,13 @@ a.newer-posts:hover { transform: translateX(-5px); }
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) { .content-box { padding: 10px; }
-  .post { width: 98%; max-width: 100%; margin: 2%; flex-direction: column; }
-  .post .post-thumbnail { width: 100%; }
+  .post-wrapper { width: 100%; }
+  .post { width: 98%; max-width: 100%; margin: 2%; flex-direction: row; }
+  .post .post-thumbnail { width: 30%; }
   .post .post-content { width: 100%; }
   .post .post-content .post-title { margin: 0 0 5px; }
-  .post .post-content .post-title a { font-size: 21px; } }
+  .post .post-content .post-title a { font-size: 1rem; }
+  .post .post-content .post-descriptions { display: none; } }
 
 .menu-item { text-decoration: none; color: #ffff; padding: 3px 30px; line-height: 25px; font-weight: 600; text-transform: uppercase; }
 
