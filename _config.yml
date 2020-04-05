@@ -30,7 +30,7 @@ social-github: LaBanHSPO
 
 # Tracker
 analytics: # Google Analytics
-
+future: true
 # Build Settings
 markdown: kramdown
 plugins:
