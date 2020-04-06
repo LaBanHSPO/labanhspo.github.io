@@ -2,7 +2,13 @@
 layout: main
 hide_sidebar: hide
 ---
-<article class="article-page">
+<!-- {% if page.boostnote %}
+{% assign wrapperClassName = "boostnote" %}
+{% else %}
+{% assign wrapperClassName = "" %}
+{% endif %} -->
+
+<article class="article-page boostnote">
     <div class="page-content">
       {% if page.post-video %}
       <div class="page-cover-video">

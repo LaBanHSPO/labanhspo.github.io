@@ -5,13 +5,6 @@ layout: default
 {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign tag_words = site_tags | split:',' | sort %}
 
-
-{% if page.boostnote %}
-{% assign wrapperClassName = "boostnote" %}
-{% else %}
-{% assign wrapperClassName = "" %}
-{% endif %}
-
 <aside class="sidebar {{layout.hide_sidebar}}">
   <header>
     <div class="about">
@@ -66,6 +59,6 @@ layout: default
     </div>
   </footer> <!-- End Footer -->
 </aside> <!-- End Sidebar -->
-<div class="{{wrapperClassName}} content-box clearfix">
+<div class="content-box clearfix">
   {{ content }}
 </div>

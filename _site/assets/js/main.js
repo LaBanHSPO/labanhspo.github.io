@@ -8,11 +8,11 @@ const copyFunction = (anchor, copyText) => {
 
 const handleCopy = (element) => {
     $(element).find('.clipboardButton').hide();
-    copyFunction(element, $(element).text());
+    copyFunction(element, $(element).find('code').text());
 };
 
 $(document).ready(() => {
-    $('.boostnote pre.code').on('click', function () {
+    $('.boostnote pre').on('click', function () {
         return handleCopy(this);
     });
     $('.boostnote .clipboardButton').on('click', function (event) {
