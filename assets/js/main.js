@@ -6,9 +6,18 @@ const copyFunction = (anchor, copyText) => {
     document.execCommand("copy");
 }
 
+const handleCopy = (element) => {
+    $(element).find('.clipboardButton').hide();
+    copyFunction(element, $(element).text());
+};
+
 $(document).ready(() => {
-    $('.boostnote pre.code').on('click', function(e) {
-        copyFunction(this, e.target.innerText);
-        $(this).find('.clipboardButton').hide();
+    $('.boostnote pre.code').on('click', function () {
+        return handleCopy(this);
+    });
+    $('.boostnote .clipboardButton').on('click', function (event) {
+        event.stopPropagation();
+        const element = $(this).parent().parent();
+        return handleCopy(element);
     });
 });
