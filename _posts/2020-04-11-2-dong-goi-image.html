@@ -1,0 +1,52 @@
+---
+title: 2. Đóng gói Docker Image và chạy thành container với Portainer
+date: 2020-04-11 00:00:00 +0700
+description: Series about Microservices and container from scratch
+img: software.jpg # Add image post (optional)
+post-video: https://www.youtube.com/embed/3yplXtHtbyY
+fig-caption: Add figcaption (optional)
+tags: [Microservices, Docker]
+---
+
+<pre class="code CodeMirror cm-s-dracula" data-line="9">        <span class="filename">sample_stack</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span></span>
+      <code class="yaml"><span class="cm-atom">version</span><span class="cm-meta">: </span><span class="cm-string">"3.7"</span>
+
+<span class="cm-atom">services</span><span class="cm-meta">:</span>
+<span class="cm-atom">  sample</span><span class="cm-meta">:</span>
+<span class="cm-atom">    image</span><span class="cm-meta">: </span>registry.tn20.wedesign.vn/simple<span class="cm-meta">:</span>latest
+<span class="cm-atom">    deploy</span><span class="cm-meta">:</span>
+<span class="cm-atom">      restart_policy</span><span class="cm-meta">:</span>
+<span class="cm-atom">        condition</span><span class="cm-meta">: </span>none
+
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="21">        <span class="filename">Dockerfile</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span></span>
+      <code class="dockerfile"><span class="cm-keyword">FROM</span> ubuntu:16.04
+<span class="cm-keyword">ENTRYPOINT</span> [ <span class="cm-string">"echo"</span>, <span class="cm-string">"Hello from my docker"</span>]
+
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="27">        <span class="filename">login_docker_hub</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker login
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="31">        <span class="filename">build_image</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker build <span class="cm-attribute">-t</span> codemantn/hello:latest .
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="35">        <span class="filename">run_image_for_dev_or_test</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker run codemantn/hello:latest
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="39">        <span class="filename">docker_push_image_to_docker_hub</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker push codemantn/hello:latest
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><h2 id="Your-actions" data-line="43">🎸 Your actions</h2>
+<ul>
+<li class="taskListItem" data-line="45"><input type="checkbox" id="checkbox-46"> Start/Stop/Pause/Resume container</li>
+<li class="taskListItem" data-line="46"><input type="checkbox" id="checkbox-47"> Xóa bớt các image không cần thiết</li>
+<li class="taskListItem" data-line="47"><input type="checkbox" id="checkbox-48"> Đóng gói image có source code của bạn</li>
+<li class="taskListItem" data-line="48"><input type="checkbox" id="checkbox-49"> Phân tích thử image đã build (export về file zip)</li>
+<li class="taskListItem" data-line="49"><input type="checkbox" id="checkbox-50"> Tạo/Sử dụng Docker Private Registry (Auth)</li>
+</ul>

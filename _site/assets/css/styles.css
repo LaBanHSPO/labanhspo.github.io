@@ -80,9 +80,7 @@
 
 .boostnote strong, .boostnote b { font-weight: bold; }
 
-.boostnote em, .boostnote i { font-style: italic; }
-
-.boostnote s, .boostnote del, .boostnote strike { text-decoration: line-through; }
+.boostnote em, .boostnote s, .boostnote del, .boostnote strike { text-decoration: line-through; }
 
 .boostnote u { text-decoration: underline; }
 
@@ -838,6 +836,8 @@ table tfoot td { font-size: 14px; }
 
 .post, .article-page { background-color: #fff; }
 
+.hide { display: none !important; }
+
 ::-moz-selection { background: rgba(38, 57, 89, 0.8); color: #ffffff; }
 
 ::selection { background: rgba(38, 57, 89, 0.8); color: #ffffff; }
@@ -936,7 +936,7 @@ a.newer-posts:hover { transform: translateX(-5px); }
 
 .page-footer { display: flex; justify-content: space-between; flex-wrap: wrap; padding-bottom: 30px; margin: 30px 0; border-bottom: 1px solid #a0a0a0; }
 
-.page-footer .page-share { margin-bottom: 10px; text-align: left; }
+.page-footer .page-share { margin-bottom: 10px; margin-right: 10px; text-align: left; }
 
 .page-footer .page-share a { display: inline-block; text-decoration: none; background-color: #fafafa; border: 1px solid #ecf0f1; padding: 5px 10px; margin-left: 5px; color: #263959; font-size: 12px; transition: background-color .3s; }
 

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>2. Đóng gói Docker Image và chạy thành container với Portainer - Codemantn</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Codemantn" property="og:site_name">
+  
+    <meta content="2. Đóng gói Docker Image và chạy thành container với Portainer" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Series about Microservices and container from scratch" property="og:description">
+  
+  
+    <meta content="http://localhost:4000/2-dong-goi-image/" property="og:url">
+  
+  
+    <meta content="2020-04-11T00:00:00+07:00" property="article:published_time">
+    <meta content="http://localhost:4000/about/" property="article:author">
+  
+  
+    <meta content="http://localhost:4000/assets/images/software.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Microservices" property="article:tag">
+    
+    <meta content="Docker" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="2. Đóng gói Docker Image và chạy thành container với Portainer">
+  
+  
+    <meta name="twitter:url" content="http://localhost:4000/2-dong-goi-image/">
+  
+  
+    <meta name="twitter:description" content="Series about Microservices and container from scratch">
+  
+  
+    <meta name="twitter:image:src" content="http://localhost:4000/assets/images/software.jpg">
+  
+
+	<meta name="description" content="Series about Microservices and container from scratch">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/boostnote/dracula.css">
+  <link rel="stylesheet" href="/assets/css/boostnote/katex.min.css">
+  <link rel="stylesheet" href="/assets/css/boostnote/codemirror.css">
+  <link rel="stylesheet" href="/assets/css/boostnote/main.min.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    
+
+
+<aside class="sidebar ">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/images/laban.png" alt="Ban Nguyen"></a>
+      </div>
+      <div class="author-name">Ban Nguyen</div>
+      <p>You get what you deserve.</p>
+    </div>
+    <ul class="site-tags tags">
+      <!--  cycles through tag list and creates header row of all tags used in site with accompanying per-tag counts...-->
+        
+          <li class="item-tag"><a href="/tags#Docker" class="tag">Docker <span>(2)</span></a></li>
+        
+          <li class="item-tag"><a href="/tags#Microservices" class="tag">Microservices <span>(2)</span></a></li>
+        
+          <li class="item-tag"><a href="/tags#Resources" class="tag">Resources <span>(1)</span></a></li>
+        
+    </ul>
+      <!--cycles through tag list and creates subheader for each tag name...-->
+  </header> <!-- End Header -->
+  <footer>
+    <!--
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://facebook.com/simpleBAN" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+        <li class="github"><a href="http://github.com/LaBanHSPO" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/bannv" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:codemantn@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+        
+      </ul>
+    </section>
+  -->
+    <section class="contact">
+      <a href="/tags"><h3 class="contact-title">Tags</a></h3></a>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Ban Nguyen</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <!--  -->
+
+<article class="article-page boostnote">
+    <div class="page-content">
+      
+      <div class="page-cover-video">
+        <iframe src="https://www.youtube.com/embed/3yplXtHtbyY" frameborder="0" allowfullscreen=""></iframe>
+      </div>
+      
+      <div class="wrap-content">
+        <header class="header-page">
+          <h1 class="page-title">2. Đóng gói Docker Image và chạy thành container với Portainer</h1>
+          <div class="page-date"><span>2020, Apr 11&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+        </header>
+        <pre class="code CodeMirror cm-s-dracula" data-line="9">        <span class="filename">sample_stack</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span></span>
+      <code class="yaml"><span class="cm-atom">version</span><span class="cm-meta">: </span><span class="cm-string">"3.7"</span>
+
+<span class="cm-atom">services</span><span class="cm-meta">:</span>
+<span class="cm-atom">  sample</span><span class="cm-meta">:</span>
+<span class="cm-atom">    image</span><span class="cm-meta">: </span>registry.tn20.wedesign.vn/simple<span class="cm-meta">:</span>latest
+<span class="cm-atom">    deploy</span><span class="cm-meta">:</span>
+<span class="cm-atom">      restart_policy</span><span class="cm-meta">:</span>
+<span class="cm-atom">        condition</span><span class="cm-meta">: </span>none
+
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-dracula" data-line="21">        <span class="filename">Dockerfile</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span></span>
+      <code class="dockerfile"><span class="cm-keyword">FROM</span> ubuntu:16.04
+<span class="cm-keyword">ENTRYPOINT</span> [ <span class="cm-string">"echo"</span>, <span class="cm-string">"Hello from my docker"</span>]
+
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-dracula" data-line="27">        <span class="filename">login_docker_hub</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker login
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-dracula" data-line="31">        <span class="filename">build_image</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker build <span class="cm-attribute">-t</span> codemantn/hello:latest .
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-dracula" data-line="35">        <span class="filename">run_image_for_dev_or_test</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker run codemantn/hello:latest
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-dracula" data-line="39">        <span class="filename">docker_push_image_to_docker_hub</span>
+      <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+      <code class="sh">docker push codemantn/hello:latest
+</code>
+    <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<h2 id="Your-actions" data-line="43">🎸 Your actions</h2>
+<ul>
+<li class="taskListItem" data-line="45"><input type="checkbox" id="checkbox-46" /> Start/Stop/Pause/Resume container</li>
+<li class="taskListItem" data-line="46"><input type="checkbox" id="checkbox-47" /> Xóa bớt các image không cần thiết</li>
+<li class="taskListItem" data-line="47"><input type="checkbox" id="checkbox-48" /> Đóng gói image có source code của bạn</li>
+<li class="taskListItem" data-line="48"><input type="checkbox" id="checkbox-49" /> Phân tích thử image đã build (export về file zip)</li>
+<li class="taskListItem" data-line="49"><input type="checkbox" id="checkbox-50" /> Tạo/Sử dụng Docker Private Registry (Auth)</li>
+</ul>
+
+        <div class="page-footer">
+          <div class="page-tag">
+            <a href="/tags" class="tag">All</a>
+            
+              <a href="/tags#Microservices" class="tag">&#35; Microservices</a>
+            
+              <a href="/tags#Docker" class="tag">&#35; Docker</a>
+            
+          </div>
+          <div class="page-share">
+            <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2-dong-goi-image/" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=2. Đóng gói Docker Image và chạy thành container với Portainer&url=http://localhost:4000/2-dong-goi-image/" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="boostnote ">
+<h2 id="Keep-in-touch!" data-line="65">🔶 Keep in touch!</h2>
+<ul>
+      <li data-line="67">For issues, optimizations, best practices, updates: <a
+                  href="https://gitter.im/codemantn/community">codemantn/community - Gitter</a></li>
+      <li data-line="68">Resource: <a href="/downloads">Downloads</a>
+      <li data-line="69">Resource: <a href="https://github.com/LaBanHSPO">GitHub</a>
+      </li>
+</ul>
+</div>
+      </div> <!-- End Wrap Content -->
+    </div> <!-- End Page Content -->
+  </article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+<!-- Main Js -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>
