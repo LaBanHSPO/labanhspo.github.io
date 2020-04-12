@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/docker-microservices/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/1-cai-dat-moi-truong/</loc>
 <lastmod>2020-04-11T00:00:00+07:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/2-dong-goi-image/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/3-cai-dat-docker-registry-rieng-cho-swarm/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/4-trien-khai-web-porta/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/5-trien-khai-inv-service/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/6-trien-khai-order-service/</loc>
+<lastmod>2020-04-11T00:00:00+07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/7-trien-khai-auth-service-tich-hop-api-gateway/</loc>
 <lastmod>2020-04-11T00:00:00+07:00</lastmod>
 </url>
 <url>

@@ -1,0 +1,181 @@
+---
+title: Docker - Microservices
+date: 2020-04-11 00:00:00 +0700
+description: Series about Microservices and container from scratch
+img: i-rest.jpg # Add image post (optional)
+fig-caption: Add figcaption (optional)
+tags: [Microservices, Docker]
+---
+
+<h1 id="Docker--Microservices" data-line="0">Docker &amp; Microservices</h1>
+<p data-line="1"><a href="#intro">I - Mở đầu</a><br>
+<a href="#start-stacks">II - Start Stacks</a><br>
+<a href="#uu-diem">III - Ưu điểm</a><br>
+<a href="#nhuoc-diem">IV - Nhược điểm</a><br>
+<a href="#lien-ket">V - Liên kết</a></p>
+<p data-line="9"><a href="#intro"></a></p>
+<h2 id="intro" data-line="11">Mở đầu</h2>
+<ul>
+<li data-line="13">
+<p data-line="13">Microservice nhìn như nào, cầm tay xem cảm giác ra sao?</p>
+</li>
+<li data-line="15">
+<p data-line="15">Bạn muốn giảm thời gian phát triển ứng dụng?</p>
+</li>
+<li data-line="17">
+<p data-line="17">Bạn muốn giảm thời gian triển khai ứng dụng?</p>
+</li>
+<li data-line="19">
+<p data-line="19">Bạn muốn tự triển khai hạ tầng dựa trên các máy chủ hiện đang có?</p>
+</li>
+<li data-line="21">
+<p data-line="21">Hoặc bạn muốn có kiến thức về container để triển khai/vận hành ứng dụng lên các nền tảng <code>Docker</code> / <code>Kubenetes</code> của <code>Amazone Web Services</code> / <code>Google Cloud</code> / <code>AzureCloud</code> / <code>DigitalOccean</code></p>
+</li>
+</ul>
+<h3 id="Docker-l%C3%A0-n%E1%BB%81n-t%E1%BA%A3ng-%C4%91%E1%BB%83-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4i-tr%C6%B0%E1%BB%9Dng-DevOps" data-line="23">Docker là nền tảng để xây dựng môi trường DevOps</h3>
+<hr>
+<p data-line="28"><img src="/assets/images/lean-stacks.svg" width="70%" alt="lean-stacks.svg"></p>
+<p data-line="30"><a href="#start-stacks"></a></p>
+<h2 id="Starter-Stacks" data-line="32">Starter Stacks</h2>
+<h3 id="API-Gateway" data-line="34">API Gateway:</h3>
+<ul>
+<li data-line="35">sử dụng Kong Gateway</li>
+<li data-line="36">chức năng chính để điều hướng API từ <code>Load Balancer</code> vào trong mạng microservices.</li>
+</ul>
+<h3 id="Auth-Service" data-line="37">Auth Service:</h3>
+<ul>
+<li data-line="38">cho phép xác thực tài khoản, cấp token, xác thực token của người dùng.</li>
+<li data-line="39">mở rộng, service này có thể đảm nhận chức năng phân quyền/bảo vệ dữ liệu cho từng yêu cầu được gửi tới hệ thống.</li>
+<li data-line="40">sử dụng Golang/NodeJS, MongoDB</li>
+</ul>
+<h3 id="Order-Service" data-line="41">Order Service:</h3>
+<ul>
+<li data-line="42">dịch vụ xử lý đơn hàng có chức năng:
+<ul>
+<li data-line="43">cho phép người dùng tạo / upload file ds đơn hàng qua API để nhập lên hệ thống. Auth qua <code>AuthService</code></li>
+<li data-line="44">cho phép bên thứ 3 tích hợp API để đẩy đơn qua từ <code>phần mềm đối tác, ERP</code> khác qua giao thức RESTful API. Auth qua <code>API Gateway</code></li>
+<li data-line="45">kết quả trả về của API bao gồm mã đơn tham chiếu + trạng thái đơn hàng.</li>
+</ul>
+</li>
+<li data-line="46">sử dụng <code>NodeJs</code>, <code>Redis</code> và  <code>RabbitMQ</code> message queue.</li>
+</ul>
+<h3 id="Inventory-Service" data-line="47">Inventory Service:</h3>
+<ul>
+<li data-line="48">
+<p data-line="48">cho phép người dùng xem tồn kho, xem vị trí hàng lưu trong kho.</p>
+</li>
+<li data-line="49">
+<p data-line="49">xử lý nghiệp vụ nhập hàng, quản lý, đồng bộ tồn kho.</p>
+</li>
+<li data-line="50">
+<p data-line="50">nhận các đơn hàng đã xử lý để lấy hàng, xuất hàng đi giao cho các đối tác vận chuyển.</p>
+</li>
+<li data-line="51">
+<p data-line="51">sử dụng <code>Python</code>, <code>MySQL</code>, <code>Redis</code>, <code>Rabbit MQ</code>.</p>
+<ul>
+<li data-line="53">Specs:</li>
+<li data-line="54">20K yêu cầu tạo mới đơn / giây.</li>
+<li data-line="55">10M+ messages / ngày.</li>
+<li data-line="56">1000 kết nối đồng thời.</li>
+<li data-line="57">Uptime 99.99999%, thời gian triển khai &lt; 2 phút.</li>
+<li data-line="58">Ghi log đầy đủ, theo dõi giám sát qua qua thông báo mobile Realtime.</li>
+<li data-line="59">Giám sát lỗi phát triển, lỗi triển khai, lỗi người dùng Realtime.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Keywords" data-line="61">Keywords</h2>
+<p data-line="63"><code>Microservices vs kiến trúc một khối</code>:</p>
+<ul>
+<li data-line="65">Khác biệt với kiến trúc nguyên khối Monolith, thay vì gom tất cả module thành một khối (monolith), Microservice tách các module thành những service siêu nhỏ. Mỗi service sẽ được đặt trên một server riêng (server vật lý hoặc server ảo hóa, hoặc đóng gói trong container docker), giao tiếp với nhau qua giao thức HTTP hoặc sử dụng MessageQueue, gRPC.</li>
+<li data-line="66">Có thể phát triển / triển khai ứng dụng theo kiến trúc Microservices mà không cần dùng Docker? Câu trả lời là được, sẽ phát sinh nhiều vấn đề về quản lý cấu hình khi số lượng máy chủ và services tăng lên (Horizontal Scaling).</li>
+</ul>
+<p data-line="68"><code>Docker</code>:</p>
+<ul>
+<li data-line="70">
+<p data-line="70">một nền tảng để <strong>đóng gói ứng dụng</strong>, đóng gói bao gồm source code + môi trường thực thi code) dưới dạng các <code>image</code> (tương tự file <code>portable-app.exe</code> trên Windows.</p>
+</li>
+<li data-line="71">
+<p data-line="71"><a href="https://vi.wikipedia.org/wiki/Ph%E1%BA%A7n_m%E1%BB%81m_x%C3%A1ch_tay">Phần mềm xách tay (portable-app) – Wikipedia tiếng Việt</a></p>
+</li>
+<li data-line="73">
+<p data-line="73">một nền tảng để <strong>triển khai ứng dụng bằng <code>container</code></strong>, có thể coi <code>container</code> như một <code>máy ảo</code> đặc biệt, có thể dừng/khởi động lại/nhân bản theo yêu cầu qua 1 dòng lệnh / click. Container được chạy dựa trên một <code>image</code> đã đóng gói và chắc chắn chạy được.</p>
+</li>
+</ul>
+<p data-line="75"><img src="/assets/images/c5bf5975.png" width="50%" alt="c5bf5975.png"></p>
+<p data-line="77"><code>Docker daemon</code>:</p>
+<ul>
+<li data-line="79">[dockerd] đây là máy chủ Docker, quản lý tài nguyên và thực thi các image, nhận các yêu cầu từ Docker Client</li>
+</ul>
+<p data-line="81"><code>Docker client</code>:</p>
+<ul>
+<li data-line="83">[docker] đây là một chương trình giúp người dùng nói chuyện với với <code>Docker daemon</code> để quản lý <code>images</code> &amp; <code>containers</code>.</li>
+</ul>
+<p data-line="85"><img src="/assets/images/90643078.png" width="50%" alt="92e098e5.png"></p>
+<blockquote data-line="87">
+<p data-line="87">VD:</p>
+</blockquote>
+<pre class="code CodeMirror cm-s-dracula" data-line="89">        <span class="filename">chạy ứng dụng hello-world docker</span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+        <code class="sh">docker run hello-world
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="93">        <span class="filename">lấy ds containers đang chạy</span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+        <code class="sh">docker <span class="cm-builtin">ps</span>
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><pre class="code CodeMirror cm-s-dracula" data-line="97">        <span class="filename">dừng container mongo4</span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+        <code class="sh">docker <span class="cm-builtin">stop</span> mongo4
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre><p data-line="100">
+        <p>Còn nhiều từ khóa để mảnh ghép kiến thức để sử dụng và triển khai ứng dụng lên cloud, mình sẽ trực tiếp giải thích trong series thực hành tiếp theo.  Nếu chưa hiểu, bạn vui lòng để tâm lại,  khi có ngữ cảnh, các từ khóa sẽ tự ghép lại theo sự hình dung của từng bạn</p></p>
+<h2 id="uu-diem" data-line="103">Ưu điểm</h2>
+<ul>
+<li data-line="105">Dễ nâng cấp và scale up, scale down</li>
+<li data-line="106">Do tách biệt nên nếu một service bị lỗi, toàn bộ hệ thống vẫn hoạt động bình thường.</li>
+<li data-line="107">Các service nằm tách biệt nhau, chúng có thể được sử dụng các ngôn ngữ lập trình riêng, database riêng. VD service xử lý ảnh có thể viết bằng C++, service tổng hợp data có thể viết bằng Python.</li>
+<li data-line="108">Có thể áp dụng được các quy trình tự động hóa, như build, deploy, monitoring,…</li>
+<li data-line="109">Khi chia nhỏ các service, team size sẽ giảm và mọi người sẽ làm việc hiệu quả hơn</li>
+<li data-line="110">Đồng nhất môi trường phát triển ứng dụng và triển khai.</li>
+</ul>
+<blockquote data-line="111">
+<p data-line="111">Tips: Bạn muốn khởi tạo môi trường để viết code chỉ trong 1 vài câu lệnh là có đủ tất cả Database, Môi trường Java/Python/Nodejs đúng phiên bản yêu cầu.<br>
+Tips: Bạn muốn những gì nhìn chạy trên máy tính cá nhân cũng chính là những gì mà máy chủ triển khai source code như nhau, tất cả cấu hình giống hệt như nhau.</p>
+</blockquote>
+<ul>
+<li data-line="113">(<code>Docker</code>) Độc lập môi trường chạy, không làm ảnh hưởng tới máy chủ chính đang chạy Docker và các service khác trong cùng mạng Docker.</li>
+<li data-line="114">(<code>Docker</code>) Dễ dàng cài đặt các gói phụ thuộc, mỗi image khi đóng gói đều chỉ định hệ điều hành, các câu lệnh khởi tạo môi trường, cài đặt thư viện sẵn sàng để khi image được đóng gói, container sẵn sàng chạy, đúng như 1 <code>portable-app.exe</code>.</li>
+<li data-line="115">(<code>Docker</code>) Khi chạy, container được chạy với quyền cao nhất và chỉ sử dụng trong phạm vi tài nguyên mà nó được cấp.</li>
+</ul>
+<blockquote data-line="116">
+<ul>
+<li data-line="116">Eg: Tài nguyên CPU/RAM/Disk/Network</li>
+<li data-line="117">Eg: Cài đặt dễ dàng Cronicle như 1 service sử dụng quyền root như Cronicle yêu cầu nhưng không làm ảnh hưởng tới bảo mật của máy chủ chạy Docker cũng như ảnh hưởng lan tới ứng dụng khác trong mạng Docker.</li>
+</ul>
+</blockquote>
+<ul>
+<li data-line="119">(<code>Docker</code>) Quản lý số lượng lớn các máy chủ, cụm máy chủ để triển khai đồng bộ, chỉ thực hiện trên 1 giao diện dòng lệnh / đồ họa web duy nhất.</li>
+<li data-line="120">(<code>Docker</code>) Theo dõi log, quản lý số lượng container / service, và có thể cài đặt cảnh báo tập trung cho toàn bộ service trên một hoặc nhiều máy chủ.</li>
+<li data-line="121">(<code>Docker</code>) Horizontal Scaling: scale ứng dụng bằng một lệnh đơn giản, hoặc tự động dựa trên mức sử dụng CPU.</li>
+<li data-line="122">Self-Healing: tự restart container lỗi, tự động phân phối lại container khi một node gặp sự cố.</li>
+<li data-line="123">Service Discovery &amp; Load Balancing: các container được cấp IP riêng biệt và DNS cho nhóm container để có thể thực hiện load balancing</li>
+</ul>
+<h2 id="nhuoc-diem" data-line="125">Nhược điểm</h2>
+<ul>
+<li data-line="127">Cần thêm tài nguyên để chạy Docker, điều này không phù hợp với các instance nhỏ, máy tính cấu hình yếu, VD: ec2-micro của Amazon Web Services, các máy chủ ảo hóa kích cỡ nhỏ (Tham khảo <code>Docker System Requirement</code>)</li>
+<li data-line="128">Cần nhiều thời gian bỏ ra nghiên cứu và xây dựng kiến trúc phần mềm theo hướng Microservices và triển khai hạ tầng.</li>
+<li data-line="129">Việc đảm bảo tính đồng nhất trong dữ liệu sẽ trở nên phức tạp hơn.</li>
+<li data-line="130">Sử dụng nhiều service nên việc theo dõi, quản lý các service này sẽ phức tạp hơn.</li>
+<li data-line="131">Không phù hợp với các ứng dụng nhỏ</li>
+</ul>
+<h2 id="lien-ket" data-line="134">Links</h2>
+<ol>
+<li data-line="136"><a href="https://docs.docker.com/get-started/swarm-deploy/">Deploy to Swarm | Docker Documentation</a></li>
+<li data-line="137"><a href="https://docs.docker.com/get-started/kube-deploy/">Deploy to Kubernetes | Docker Documentation</a></li>
+<li data-line="138"><a href="https://microk8s.io/">MicroK8s - Fast, Light, Upstream Developer Kubernetes</a></li>
+<li data-line="139"><a href="https://www.portainer.io/">Portainer Management, Docker User Interface, Container Software - Auckland, Singapore, San Francisco | Emerging Technology Partners</a></li>
+<li data-line="140"><a href="https://dzone.com/articles/9-reasons-why-devops-is-better-with-docker-amp-kub">9 Reasons DevOps Is Better With Docker and Kubernetes - DZone DevOps</a></li>
+<li data-line="141"><a href="https://github.com/jhuckaby/Cronicle">GitHub - jhuckaby/Cronicle: A simple, distributed task scheduler and runner with a web based UI.</a></li>
+<li data-line="142"><a href="https://docs.docker.com/docker-for-mac/install/#system-requirements">Docker System Requirement | Docker Documentation</a></li>
+<li data-line="143"><a href="https://toidicodedao.com/2019/10/08/message-queue-la-gi-ung-dung-microservice/">Messege Queue – Bộ phận không thể thiếu trong các hệ thống lớn và microservice architecture | Từ coder đến developer – Tôi đi code dạo</a></li>
+<li data-line="144"><a href="https://medium.com/@tselentispanagis/managing-microservices-and-apis-with-kong-and-konga-7d14568bb59d">Managing microservices and APIs with Kong and Konga</a></li>
+</ol>
