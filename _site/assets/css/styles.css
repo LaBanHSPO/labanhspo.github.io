@@ -849,7 +849,7 @@ table tfoot td { font-size: 14px; }
 textarea { position: absolute; left: -100%; }
 
 /* - - - - - - - - - - Home Page Styles - - - - - - - - - - */
-.sidebar { display: flex; flex-direction: column; justify-content: space-between; position: fixed; top: 0; left: 0; bottom: 0; width: 240px; height: 100%; padding: 20px 10px; background-color: #ffffff; }
+.sidebar { display: flex; flex-direction: column; justify-content: space-between; position: fixed; top: 0; left: 0; bottom: 0; width: 300px; height: 100%; padding: 20px 10px; background-color: #ffffff; }
 
 .about { margin: 0 0 40px; text-align: center; }
 
@@ -865,7 +865,7 @@ textarea { position: absolute; left: -100%; }
 
 .about p { font-size: 16px; margin: 0 0 10px; }
 
-.content-box { padding: 20px; padding-left: 260px; display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; }
+.content-box { padding: 20px; padding-left: 300px; display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; }
 
 .contact a { text-decoration: none; }
 
