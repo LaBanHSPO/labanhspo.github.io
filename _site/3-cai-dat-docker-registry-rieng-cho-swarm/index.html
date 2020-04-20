@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Cài đặt Docker Private Registry - Codemantn</title>
+	<title>3. Cài đặt Docker Private Registry - Codemantn</title>
 
   <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
 
     <meta content="Codemantn" property="og:site_name">
   
-    <meta content="Cài đặt Docker Private Registry" property="og:title">
+    <meta content="3. Cài đặt Docker Private Registry" property="og:title">
   
   
     <meta content="article" property="og:type">
@@ -17,14 +17,14 @@
     <meta content="Series about Microservices and container from scratch" property="og:description">
   
   
-    <meta content="https://labanhspo.github.io/3-cai-dat-docker-registry-rieng-cho-swarm/" property="og:url">
+    <meta content="http://localhost:4000/3-cai-dat-docker-registry-rieng-cho-swarm/" property="og:url">
   
   
     <meta content="2020-04-11T00:00:00+07:00" property="article:published_time">
-    <meta content="https://labanhspo.github.io/about/" property="article:author">
+    <meta content="http://localhost:4000/about/" property="article:author">
   
   
-    <meta content="https://labanhspo.github.io/assets/images/pending.png" property="og:image">
+    <meta content="http://localhost:4000/assets/images/software.jpg" property="og:image">
   
   
     
@@ -41,16 +41,16 @@
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
   
-    <meta name="twitter:title" content="Cài đặt Docker Private Registry">
+    <meta name="twitter:title" content="3. Cài đặt Docker Private Registry">
   
   
-    <meta name="twitter:url" content="https://labanhspo.github.io/3-cai-dat-docker-registry-rieng-cho-swarm/">
+    <meta name="twitter:url" content="http://localhost:4000/3-cai-dat-docker-registry-rieng-cho-swarm/">
   
   
     <meta name="twitter:description" content="Series about Microservices and container from scratch">
   
   
-    <meta name="twitter:image:src" content="https://labanhspo.github.io/assets/images/pending.png">
+    <meta name="twitter:image:src" content="http://localhost:4000/assets/images/software.jpg">
   
 
 	<meta name="description" content="Series about Microservices and container from scratch">
@@ -113,7 +113,7 @@
         
           <li class="item-tag"><a href="/tags#RabbitMQ" class="tag">RabbitMQ <span>(1)</span></a></li>
         
-          <li class="item-tag"><a href="/tags#React" class="tag">React <span>(1)</span></a></li>
+          <li class="item-tag"><a href="/tags#ReactJS" class="tag">ReactJS <span>(1)</span></a></li>
         
           <li class="item-tag"><a href="/tags#Redis" class="tag">Redis <span>(1)</span></a></li>
         
@@ -156,23 +156,92 @@
 <article class="article-page boostnote">
     <div class="page-content">
       
-        
-        <div class="page-cover-image">
-          <figure>
-            <img class="page-image" src=/assets/images/pending.png alt="Cài đặt Docker Private Registry">
-            
-              <figcaption>Add figcaption (optional)</figcaption>
-            
-          </figure>
-        </div> <!-- End Page Cover Image -->
-        
+      <div class="page-cover-video">
+        <iframe src="https://www.youtube.com/embed/nvFYu0ASnDI" frameborder="0" allowfullscreen=""></iframe>
+      </div>
       
       <div class="wrap-content">
         <header class="header-page">
-          <h1 class="page-title">Cài đặt Docker Private Registry</h1>
+          <h1 class="page-title">3. Cài đặt Docker Private Registry</h1>
           <div class="page-date"><span>2020, Apr 11&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </header>
-        
+        <ul>
+<li data-line="2">Tạo tài khoản (setup private registry)</li>
+</ul>
+<pre class="code CodeMirror cm-s-midnight" data-line="8">        <span class="filename">create_password</span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span></span>
+        <code class="sh">docker run \
+  <span class="cm-attribute">--entrypoint</span> htpasswd \
+  registry:2 <span class="cm-attribute">-Bbn</span> builder testpassword &gt; ./passfile
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<ul>
+<li data-line="14">Tạo Docker Swarm Secret</li>
+</ul>
+<p data-line="16">Đặt tên secret: <code>registryv2_auth_credentials</code></p>
+<ul>
+<li data-line="18">Khởi chạy Registry từ template:</li>
+</ul>
+<pre class="code CodeMirror cm-s-midnight" data-line="20">        <span class="filename">registry_template_from_official_docker</span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span><span class="CodeMirror-linenumber">10</span><span class="CodeMirror-linenumber">11</span><span class="CodeMirror-linenumber">12</span><span class="CodeMirror-linenumber">13</span><span class="CodeMirror-linenumber">14</span><span class="CodeMirror-linenumber">15</span><span class="CodeMirror-linenumber">16</span><span class="CodeMirror-linenumber">17</span><span class="CodeMirror-linenumber">18</span><span class="CodeMirror-linenumber">19</span><span class="CodeMirror-linenumber">20</span><span class="CodeMirror-linenumber">21</span><span class="CodeMirror-linenumber">22</span><span class="CodeMirror-linenumber">23</span><span class="CodeMirror-linenumber">24</span><span class="CodeMirror-linenumber">25</span><span class="CodeMirror-linenumber">26</span><span class="CodeMirror-linenumber">27</span><span class="CodeMirror-linenumber">28</span><span class="CodeMirror-linenumber">29</span><span class="CodeMirror-linenumber">30</span><span class="CodeMirror-linenumber">31</span><span class="CodeMirror-linenumber">32</span><span class="CodeMirror-linenumber">33</span><span class="CodeMirror-linenumber">34</span><span class="CodeMirror-linenumber">35</span><span class="CodeMirror-linenumber">36</span><span class="CodeMirror-linenumber">37</span><span class="CodeMirror-linenumber">38</span><span class="CodeMirror-linenumber">39</span><span class="CodeMirror-linenumber">40</span><span class="CodeMirror-linenumber">41</span><span class="CodeMirror-linenumber">42</span></span>
+        <code class="yml"><span class="cm-atom">version</span><span class="cm-meta">: </span><span class="cm-string">"3.7"</span>
+
+<span class="cm-atom">services</span><span class="cm-meta">:</span>
+<span class="cm-atom">  registry</span><span class="cm-meta">:</span>
+<span class="cm-atom">    restart</span><span class="cm-meta">: </span>always
+<span class="cm-atom">    image</span><span class="cm-meta">: </span>registry<span class="cm-meta">:</span><span class="cm-number">2</span>
+<span class="cm-atom">    secrets</span><span class="cm-meta">:</span>
+<span class="cm-meta">      - </span>registry_v2_auth_credentials
+<span class="cm-atom">    environment</span><span class="cm-meta">:</span>
+<span class="cm-atom">      REGISTRY_AUTH</span><span class="cm-meta">: </span>htpasswd
+<span class="cm-atom">      REGISTRY_AUTH_HTPASSWD_PATH</span><span class="cm-meta">: </span>/run/secrets/registry_v2_auth_credentials
+<span class="cm-atom">      REGISTRY_AUTH_HTPASSWD_REALM</span><span class="cm-meta">: </span>Registry Realm
+<span class="cm-atom">    deploy</span><span class="cm-meta">:</span>
+<span class="cm-atom">      labels</span><span class="cm-meta">:</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.enable=true"</span>
+        <span class="cm-comment"># Routers</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_http_router.entrypoints=http"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_http_router.middlewares=httpsRedirectScheme"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_http_router.rule=Host(`registryv2.tn20.wedesign.vn`)"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_http_router.service=registry_service"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_https_router.entrypoints=https"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_https_router.rule=Host(`registryv2.tn20.wedesign.vn`)"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_https_router.service=registry_v2_service"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.routers.registry_v2_https_router.tls.certresolver=httpChallenge"</span>
+        <span class="cm-comment"># Services</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.services.registry_v2_service.loadbalancer.server.port=5000"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.middlewares.httpsRedirectScheme.redirectscheme.scheme=https"</span>
+<span class="cm-meta">        - </span><span class="cm-string">"traefik.http.middlewares.httpsRedirectScheme.redirectscheme.permanent=true"</span>
+<span class="cm-atom">    volumes</span><span class="cm-meta">:</span>
+<span class="cm-meta">      - </span>data:/var/lib/registry
+<span class="cm-meta">      - </span>certs:/certs
+<span class="cm-atom">    networks</span><span class="cm-meta">:</span>
+<span class="cm-meta">      - </span>public_proxy
+<span class="cm-atom">volumes</span><span class="cm-meta">:</span>
+<span class="cm-atom">  data</span><span class="cm-meta">:</span>
+<span class="cm-atom">  certs</span><span class="cm-meta">:</span>
+<span class="cm-atom">networks</span><span class="cm-meta">:</span>
+<span class="cm-atom">  public_proxy</span><span class="cm-meta">:</span>
+<span class="cm-atom">    external</span><span class="cm-meta">: </span><span class="cm-keyword">true</span>
+<span class="cm-atom">secrets</span><span class="cm-meta">:</span>
+<span class="cm-atom">  registry_v2_auth_credentials</span><span class="cm-meta">:</span>
+<span class="cm-atom">     external</span><span class="cm-meta">: </span><span class="cm-keyword">true</span>
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<p data-line="65">Hoàn thành, test thử:</p>
+<pre class="code CodeMirror cm-s-midnight" data-line="67">        <span class="filename"></span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span></span>
+        <code class="sh"><span class="cm-builtin">curl</span> <span class="cm-attribute">-kv</span> https://registryv2.tn20.wedesign.vn
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<pre class="code CodeMirror cm-s-midnight" data-line="71">        <span class="filename"></span>
+        <span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span></span>
+        <code class="sh">docker login <span class="cm-attribute">-u</span> builder registryv2.tn20.wedesign.vn
+docker build <span class="cm-attribute">-t</span> registryv2.tn20.wedesign.vn/celery_worker:latest .
+docker push registryv2.tn20.wedesign.vn/celery_worker:latest
+</code>
+      <i><button class="clipboardButton"><svg width="13" height="13" viewBox="0 0 1792 1792"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z"></path></svg></button></i></pre>
+<p>&lt;</p>
 
         <div class="page-footer">
           <div class="page-tag">
@@ -184,8 +253,8 @@
             
           </div>
           <div class="page-share">
-            <a href="https://facebook.com/sharer.php?u=https://labanhspo.github.io/3-cai-dat-docker-registry-rieng-cho-swarm/" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/intent/tweet?text=Cài đặt Docker Private Registry&url=https://labanhspo.github.io/3-cai-dat-docker-registry-rieng-cho-swarm/" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://facebook.com/sharer.php?u=http://localhost:4000/3-cai-dat-docker-registry-rieng-cho-swarm/" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=3. Cài đặt Docker Private Registry&url=http://localhost:4000/3-cai-dat-docker-registry-rieng-cho-swarm/" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
           </div>
         </div>
         <div class="boostnote ">
