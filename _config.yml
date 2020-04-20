@@ -23,9 +23,9 @@ url: https://labanhspo.github.io # the base hostname & protocol for your site, e
 author: Ban Nguyen # add your name
 author-img: laban.png # add your photo
 about-author: You get what you deserve. # add description
-social-facebook: simpleBAN # add your Facebook handle
-social-linkedin: bannv # add your Linkedin handle
-social-email: codemantn@gmail.com
+# social-facebook: simpleBAN # add your Facebook handle
+# social-linkedin: bannv # add your Linkedin handle
+social-email: hided # codemantn@gmail.com
 social-github: LaBanHSPO
 
 # Tracker
